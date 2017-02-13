@@ -10,7 +10,7 @@ canvas.width = Constants.SCREEN_WIDTH;
 const ctx = canvas.getContext("2d");
 root.appendChild(canvas);
 
-function loop(fn) {
+const loop = (fn) => {
     let rAF = window.webkitRequestAnimationFrame || window.requestAnimationFrame || window.mozRequestAnimationFrame;
     rAF(fn);
 }
@@ -71,10 +71,12 @@ export default class Invasion {
         this.drawGrid();
         this.updateInvaders();
         this.drawInvaders();
-        loop(this.draw.bind(this))
+        loop(() => {
+            this.draw();
+        });
     }
 }
 
-let invasion = new Invasion(40);
+let invasion = new Invasion(50);
 invasion.draw();
 
