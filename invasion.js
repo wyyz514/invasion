@@ -16,10 +16,11 @@ function loop(fn) {
 }
     
 export default class Invasion {
-    constructor() {
+    constructor(invaderCount) {
         this.grid = new Grid(15);
         this.grid.generateBlocks();
         this.invaders = [];
+        this.invaderCount = invaderCount;
         this.createInvaders();
     }
     
@@ -28,7 +29,7 @@ export default class Invasion {
     }
     
     createInvaders() {
-        for(let i = 0; i < 100; i++) {
+        for(let i = 0; i < this.invaderCount; i++) {
             let coords = this.grid.getRandomBlock();
             let invader = new Invader(coords, 15);
             this.invaders.push(invader);
@@ -74,6 +75,6 @@ export default class Invasion {
     }
 }
 
-let invasion = new Invasion();
+let invasion = new Invasion(40);
 invasion.draw();
 
