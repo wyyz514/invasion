@@ -11,12 +11,13 @@ const ctx = canvas.getContext("2d");
 root.appendChild(canvas);
 
 function loop(fn) {
-    window.webkitRequestAnimationFrame(fn);
+    let rAF = window.webkitRequestAnimationFrame || window.requestAnimationFrame || window.mozRequestAnimationFrame;
+    rAF(fn);
 }
     
 export default class Invasion {
     constructor() {
-        this.grid = new Grid(20);
+        this.grid = new Grid(15);
         this.grid.generateBlocks();
         this.invaders = [];
         this.createInvaders();
@@ -27,16 +28,16 @@ export default class Invasion {
     }
     
     createInvaders() {
-        for(let i = 0; i < 150; i++) {
+        for(let i = 0; i < 100; i++) {
             let coords = this.grid.getRandomBlock();
-            let invader = new Invader(coords, 20);
+            let invader = new Invader(coords, 15);
             this.invaders.push(invader);
         }    
     }
     
     createInvader() {
         let coords = this.grid.getRandomBlock();
-        let invader = new Invader({x: coords.x, y: Constants.SCREEN_HEIGHT}, 20);
+        let invader = new Invader({x: coords.x, y: Constants.SCREEN_HEIGHT}, 15);
         this.invaders.push(invader);
     }
     

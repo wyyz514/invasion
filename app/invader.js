@@ -1,3 +1,5 @@
+import Constants from '../utils/constants';
+
 const path = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,0]];
 
 export default class Invader {
@@ -33,24 +35,22 @@ export default class Invader {
     }
     
     draw() {
+
         let points = this.points.length > 0 ? this.points : this.generatePoints();
         function drawHandler(line) {
             let [point1, point2] = line;
 
-            this.save();
             this.beginPath();
-            this.strokeStyle = "#9B30FF";
+            this.strokeStyle = "rgba(30, 220, 10, 1)";
             this.moveTo(points[point1].x, points[point1].y);
             this.lineTo(points[point2].x, points[point2].y);
             this.closePath();
             this.stroke();
-            this.restore();
         }
         
         return function() {
-          
+            let dh = drawHandler.bind(this);
             for(let i = 0; i < path.length; i++) {
-                let dh = drawHandler.bind(this);
                 dh(path[i]);
             }
         }
